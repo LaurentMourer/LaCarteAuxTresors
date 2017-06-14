@@ -22,28 +22,13 @@ public class ModeleDuJeu {
     List<ObjetDeplacable> listeAventurier;
 
     public ModeleDuJeu() {
-        listeAventurier = new ArrayList();
-        managerFichier = new ManagerFichier("/Users/laurentmourer/Downloads/LaCarteAuxTresors/LaCarteAuxTresors/target/classes/test.txt");
+        ClassLoader classLoader = getClass().getClassLoader();
+        managerFichier = new ManagerFichier(classLoader.getResource("test.txt").getFile());
         List<String> listeLignes = managerFichier.getLignes();
+        Creation creation = new Creation(listeLignes, " - ");
+        listeAventurier = creation.getListeObjetDeplacable();
+        carte = creation.getCarte();
 
-        listeLignes.stream().map((ligne) -> ligne.split(" - ")).map((tokenLigne) -> {
-            if ("C".equalsIgnoreCase(tokenLigne[0].trim())) {
-                carte = new Carte(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim()));
-            }
-            return tokenLigne;
-        }).filter((tokenLigne) -> (carte != null)).map((tokenLigne) -> {
-            if (tokenLigne[0].trim().equalsIgnoreCase("T")) {
-                carte.ajouterObjet(new Tresor(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim()), Integer.parseInt(tokenLigne[3].trim())));
-            }
-            return tokenLigne;
-        }).map((tokenLigne) -> {
-            if (tokenLigne[0].trim().equalsIgnoreCase("M")) {
-                carte.ajouterObjet(new Montagne(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim())));
-            }
-            return tokenLigne;
-        }).filter((tokenLigne) -> (tokenLigne[0].trim().equalsIgnoreCase("A"))).map((tokenLigne) -> new Aventurier(tokenLigne[1], Integer.parseInt(tokenLigne[2].trim()), Integer.parseInt(tokenLigne[3].trim()), tokenLigne[4], tokenLigne[5])).forEachOrdered((aventurier) -> {
-            listeAventurier.add(aventurier);
-        });
     }
 
     public void lectureSequence() {
@@ -76,7 +61,7 @@ public class ModeleDuJeu {
                                 if (carte.getCase(futureCase.getX(), futureCase.getY()) instanceof Tresor && aventurier instanceof Aventurier) {
                                     //Si il est sur une case tresor, on le prend
                                     ((Tresor) carte.getCase(futureCase.getX(), futureCase.getY())).tresorPris();
-                                   //Et on incremente son compteur de tresor ramassé
+                                    //Et on incremente son compteur de tresor ramassé
                                     ((Aventurier) aventurier).ramasseTresor();
                                 }
                                 //puis on fait avancer l'aventurier
@@ -93,8 +78,9 @@ public class ModeleDuJeu {
                     default:
                         break;
                 }
+                System.out.println(aventurier.toString());
             }
         }
     }
-    
+
 }
