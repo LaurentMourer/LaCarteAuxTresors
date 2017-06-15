@@ -8,8 +8,8 @@ package entite;
 public class Carte {
 
     private final Case[][] carte;
-    int x;
-    int y;
+    private int x;
+    private int y;
 
     /**
      * Constructeur de la classe Carte
@@ -59,6 +59,11 @@ public class Carte {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "C - " + x + " - " + y;
     }
 
 }

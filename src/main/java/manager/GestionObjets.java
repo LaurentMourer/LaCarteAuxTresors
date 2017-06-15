@@ -10,38 +10,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Classe de creation des objets en fonction du fichier
  *
  * @author laurentmourer
  */
-public class Creation {
+public class GestionObjets {
 
     private List<ObjetDeplacable> listeObjetDeplacable;
     private List<Case> listeCase;
-    Carte carte;
+    private Carte carte;
+    private GestionFichier gestionFichier;
 
-    public Creation(List<String> listeLignes, String delimiter) {
-        
+    public GestionObjets(List<String> listeLignes, String delimiter) {
+        gestionFichier = new GestionFichier();
         listeObjetDeplacable = new ArrayList();
         listeCase = new ArrayList();
 
         listeLignes.stream().map((ligne) -> ligne.split(delimiter)).map((tokenLigne) -> {
             if ("C".equalsIgnoreCase(tokenLigne[0].trim())) {
+
                 carte = new Carte(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim()));
             }
             return tokenLigne;
         }).filter((tokenLigne) -> (carte != null)).map((tokenLigne) -> {
             if (tokenLigne[0].trim().equalsIgnoreCase("T")) {
-                carte.ajouterObjet(new Tresor(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim()), Integer.parseInt(tokenLigne[3].trim())));
+                Tresor t = new Tresor(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim()), Integer.parseInt(tokenLigne[3].trim()));
+                listeCase.add(t);
             }
             return tokenLigne;
         }).map((tokenLigne) -> {
             if (tokenLigne[0].trim().equalsIgnoreCase("M")) {
-                carte.ajouterObjet(new Montagne(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim())));
+                Montagne m = new Montagne(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim()));
+                listeCase.add(m);
             }
             return tokenLigne;
         }).filter((tokenLigne) -> (tokenLigne[0].trim().equalsIgnoreCase("A"))).map((tokenLigne) -> new Aventurier(tokenLigne[1], Integer.parseInt(tokenLigne[2].trim()), Integer.parseInt(tokenLigne[3].trim()), tokenLigne[4], tokenLigne[5])).forEachOrdered((aventurier) -> {
             listeObjetDeplacable.add(aventurier);
         });
+    }
+
+    public void recopieObjetDansFichier() {
+        List<String> liste = new ArrayList();
+        liste.add(carte.toString());
+        this.listeCase.forEach((caase) -> {
+            liste.add(caase.toString());
+        });
+        this.listeObjetDeplacable.forEach((aventurier) -> {
+            liste.add(aventurier.toString());
+        });
+        gestionFichier.ecrireFichier("text.txt", liste);
     }
 
     public List<ObjetDeplacable> getListeObjetDeplacable() {
@@ -67,7 +84,5 @@ public class Creation {
     public void setCarte(Carte carte) {
         this.carte = carte;
     }
-    
-    
 
 }

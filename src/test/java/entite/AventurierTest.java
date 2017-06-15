@@ -17,22 +17,25 @@ import static org.junit.Assert.*;
  * @author laurentmourer
  */
 public class AventurierTest {
-    
+Aventurier instance;
     public AventurierTest() {
+        instance = new Aventurier("av", 1, 2, "O", "AGDDAA");
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
+         
+
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,24 +46,8 @@ public class AventurierTest {
     @Test
     public void testRamasseTresor() {
         System.out.println("ramasseTresor");
-        Aventurier instance = null;
         instance.ramasseTresor();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(0+1, instance.getTresorRamasse());
     }
 
-    /**
-     * Test of toString method, of class Aventurier.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Aventurier instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

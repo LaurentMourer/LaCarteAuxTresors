@@ -1,6 +1,6 @@
 package app;
 
-import manager.ModeleDuJeu;
+import manager.GestionJeu;
 
 /**
  * Classe principale
@@ -10,8 +10,9 @@ import manager.ModeleDuJeu;
 public class App {
 
     public static void main(String[] args) {
-        ModeleDuJeu modeleDuJeu = new ModeleDuJeu();
+        GestionJeu modeleDuJeu = new GestionJeu();
         modeleDuJeu.lectureSequence();
+        System.out.println(modeleDuJeu.toString());
 
     }
 }

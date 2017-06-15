@@ -30,6 +30,14 @@ public class Aventurier extends Personnage {
         tresorRamasse++;
     }
 
+    public int getTresorRamasse() {
+        return tresorRamasse;
+    }
+
+    public void setTresorRamasse(int tresorRamasse) {
+        this.tresorRamasse = tresorRamasse;
+    }
+
     @Override
     public String toString() {
         return "A - " + super.toString() + " - " + tresorRamasse;

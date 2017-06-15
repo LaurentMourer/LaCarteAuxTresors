@@ -44,7 +44,7 @@ public class ManagerFichierTest {
     @Test
     public void testGetLignes() {
         System.out.println("getLignes");
-        ManagerFichier instance = null;
+        GestionFichier instance = null;
         List<String> expResult = null;
         List<String> result = instance.getLignes();
         assertEquals(expResult, result);
@@ -59,7 +59,7 @@ public class ManagerFichierTest {
     public void testSetLignes() {
         System.out.println("setLignes");
         List<String> lignes = null;
-        ManagerFichier instance = null;
+        GestionFichier instance = null;
         instance.setLignes(lignes);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
