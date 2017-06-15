@@ -2,10 +2,8 @@ package manager;
 
 import entite.Aventurier;
 import entite.Carte;
-import entite.Montagne;
 import entite.ObjetDeplacable;
 import entite.Tresor;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
