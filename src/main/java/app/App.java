@@ -10,9 +10,7 @@ import manager.GestionJeu;
 public class App {
 
     public static void main(String[] args) {
-        GestionJeu modeleDuJeu = new GestionJeu();
-        modeleDuJeu.lectureSequence();
-        System.out.println(modeleDuJeu.toString());
+        new GestionJeu().lectureSequence();
 
     }
 }

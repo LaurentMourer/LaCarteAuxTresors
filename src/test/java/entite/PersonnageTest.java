@@ -17,22 +17,26 @@ import static org.junit.Assert.*;
  * @author laurentmourer
  */
 public class PersonnageTest {
-    
+
+    private Aventurier instance;
+
     public PersonnageTest() {
+        instance = new Aventurier("Lara", 1, 1, "S", "AGDA");
+
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,12 +47,10 @@ public class PersonnageTest {
     @Test
     public void testGetNom() {
         System.out.println("getNom");
-        Personnage instance = null;
-        String expResult = "";
+        String expResult = "Lara";
         String result = instance.getNom();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -57,25 +59,9 @@ public class PersonnageTest {
     @Test
     public void testSetNom() {
         System.out.println("setNom");
-        String nom = "";
-        Personnage instance = null;
+        String nom = "Croft";
         instance.setNom(nom);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(nom, instance.getNom());
     }
 
-    /**
-     * Test of toString method, of class Personnage.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Personnage instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

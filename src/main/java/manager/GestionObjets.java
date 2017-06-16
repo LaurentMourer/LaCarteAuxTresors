@@ -36,7 +36,6 @@ public class GestionObjets {
 
         listeLignes.stream().map((ligne) -> ligne.split(delimiter)).map((tokenLigne) -> {
             if ("C".equalsIgnoreCase(tokenLigne[0].trim())) {
-
                 carte = new Carte(Integer.parseInt(tokenLigne[1].trim()), Integer.parseInt(tokenLigne[2].trim()));
             }
             return tokenLigne;
@@ -60,8 +59,9 @@ public class GestionObjets {
     /**
      * Methode qui recopie les listes dans un fichier
      *
+     * @param fichier
      */
-    public void recopieObjetDansFichier() {
+    public void recopieObjetDansFichier(String fichier) {
         List<String> liste = new ArrayList();
         liste.add(carte.toString());
         this.listeCase.forEach((caase) -> {
@@ -70,7 +70,7 @@ public class GestionObjets {
         this.listeObjetDeplacable.forEach((aventurier) -> {
             liste.add(aventurier.toString());
         });
-        gestionFichier.ecrireFichier("text.txt", liste);
+        gestionFichier.ecrireFichier(fichier, liste);
     }
 
     public List<ObjetDeplacable> getListeObjetDeplacable() {

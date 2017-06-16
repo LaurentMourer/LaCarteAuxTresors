@@ -4,7 +4,6 @@ import entite.Aventurier;
 import entite.Carte;
 import entite.ObjetDeplacable;
 import entite.Tresor;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,9 +18,8 @@ public class GestionJeu {
     private final Carte carte;
     private final GestionFichier managerFichier;
     private final List<ObjetDeplacable> listeAventurier;
-    private final GestionObjets creation;
+    private final GestionObjets gestionObjets;
     private final List<String> listeLignes;
-    private final ClassLoader classLoader;
 
     /**
      * Constructeur de la classe GestionJeu, Il instancie toutes les classes et
@@ -29,14 +27,13 @@ public class GestionJeu {
      *
      */
     public GestionJeu() {
-        classLoader = getClass().getClassLoader();
         managerFichier = new GestionFichier();
-        managerFichier.lireFichier();
+        managerFichier.lireFichier("input.txt");
         listeLignes = managerFichier.getLignes();
-        creation = new GestionObjets(listeLignes, " - ");
-        listeAventurier = creation.getListeObjetDeplacable();
-        carte = creation.getCarte();
-        creation.getListeCase().forEach((caase) -> {
+        gestionObjets = new GestionObjets(listeLignes, " - ");
+        listeAventurier = gestionObjets.getListeObjetDeplacable();
+        carte = gestionObjets.getCarte();
+        gestionObjets.getListeCase().forEach((caase) -> {
             carte.ajouterObjet(caase);
         });
 
@@ -78,9 +75,9 @@ public class GestionJeu {
                     default:
                         break;
                 }
-                System.out.println(aventurier.toString());
             }
         }
+        gestionObjets.recopieObjetDansFichier("Sortie.txt");
     }
 
     /**
@@ -112,11 +109,4 @@ public class GestionJeu {
             return false;
         }
     }
-
-    @Override
-    public String toString() {
-        return Arrays.toString(creation.getListeObjetDeplacable().toArray()) + "\n" + Arrays.toString(creation.getListeCase().toArray());
-
-    }
-
 }

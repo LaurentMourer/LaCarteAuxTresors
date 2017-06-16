@@ -1,6 +1,7 @@
 package manager;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,12 +26,13 @@ public class GestionFichier {
     /**
      * Methode qui écrit dans un fichier
      *
+     * @param fichier nom du fichier qui se situe dans le repertoire ressource
      */
-    public void lireFichier() {
-        Path path = Paths.get("C:/Users/pbyw529/Desktop/LaCarteAuxTresors/target/classes/test.txt");
+    public void lireFichier(String fichier) {
         try {
+            Path path = Paths.get(ClassLoader.getSystemResource(fichier).toURI());
             lignes = Files.readAllLines(path, StandardCharsets.UTF_8);
-        } catch (IOException ex) {
+        } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(GestionFichier.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -38,11 +40,15 @@ public class GestionFichier {
     /**
      * Methode qui lit un fichier
      *
+     * @param fichier nom du fichier qui se situe dans le repertoire ressource
+     * du projet
+     * @param liste liste de ligne à écrire dans le fichier
      */
     public void ecrireFichier(String fichier, List<String> liste) {
-        Path path = Paths.get("C:/Users/pbyw529/Desktop/LaCarteAuxTresors/target/classes/test2.txt");
-
         try {
+         
+            Path path = Paths.get("src/main/resources/sortie.txt");
+            //Path path = Paths.get(ClassLoader.getSystemResource(fichier).toURI());
             Files.write(path, liste, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             Logger.getLogger(GestionFichier.class.getName()).log(Level.SEVERE, null, ex);

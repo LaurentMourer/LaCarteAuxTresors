@@ -157,7 +157,7 @@ public class ObjetDeplacableTest {
     @Test
     public void testGetSequence() {
         System.out.println("getSequence");
-        char[] expResult = null;
+        char[] expResult = {'A', 'G', 'D', 'A'};
         char[] result = instance.getSequence();
         assertArrayEquals(expResult, result);
 
@@ -180,7 +180,7 @@ public class ObjetDeplacableTest {
     @Test
     public void testClone() throws Exception {
         System.out.println("clone");
-        ObjetDeplacable expResult = null;
+        ObjetDeplacable expResult = new Aventurier("Lara", 1, 1, "S", "AGDA");
         ObjetDeplacable result = instance.clone();
         assertEquals(expResult, result);
 
