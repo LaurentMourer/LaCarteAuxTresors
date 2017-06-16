@@ -17,14 +17,15 @@ import static org.junit.Assert.*;
  * @author laurentmourer
  */
 public class AventurierTest {
-Aventurier instance;
+
+    private final Aventurier instance;
+
     public AventurierTest() {
         instance = new Aventurier("av", 1, 2, "O", "AGDDAA");
     }
 
     @BeforeClass
     public static void setUpClass() {
-         
 
     }
 
@@ -47,7 +48,7 @@ Aventurier instance;
     public void testRamasseTresor() {
         System.out.println("ramasseTresor");
         instance.ramasseTresor();
-        assertEquals(0+1, instance.getTresorRamasse());
+        assertEquals(0 + 1, instance.getTresorRamasse());
     }
 
 }

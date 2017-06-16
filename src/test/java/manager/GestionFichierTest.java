@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author laurentmourer
  */
-public class ManagerFichierTest {
+public class GestionFichierTest {
     
-    public ManagerFichierTest() {
+    public GestionFichierTest() {
     }
     
     @BeforeClass

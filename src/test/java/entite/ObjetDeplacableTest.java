@@ -17,22 +17,25 @@ import static org.junit.Assert.*;
  * @author laurentmourer
  */
 public class ObjetDeplacableTest {
-    
+
+    private final ObjetDeplacable instance;
+
     public ObjetDeplacableTest() {
+        instance = new Aventurier("Lara", 1, 1, "S", "AGDA");
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,10 +46,8 @@ public class ObjetDeplacableTest {
     @Test
     public void testAvancer() {
         System.out.println("avancer");
-        ObjetDeplacable instance = null;
         instance.avancer();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -55,10 +56,8 @@ public class ObjetDeplacableTest {
     @Test
     public void testDroite() {
         System.out.println("droite");
-        ObjetDeplacable instance = null;
         instance.droite();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -67,10 +66,8 @@ public class ObjetDeplacableTest {
     @Test
     public void testGauche() {
         System.out.println("gauche");
-        ObjetDeplacable instance = null;
         instance.gauche();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -79,27 +76,11 @@ public class ObjetDeplacableTest {
     @Test
     public void testEquals() {
         System.out.println("equals");
-        Object obj = null;
-        ObjetDeplacable instance = null;
-        boolean expResult = false;
+        Object obj = new Aventurier("Lara", 1, 1, "S", "AGDA");
+        boolean expResult = true;
         boolean result = instance.equals(obj);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of toString method, of class ObjetDeplacable.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        ObjetDeplacable instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -108,12 +89,10 @@ public class ObjetDeplacableTest {
     @Test
     public void testGetX() {
         System.out.println("getX");
-        ObjetDeplacable instance = null;
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.getX();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -123,10 +102,8 @@ public class ObjetDeplacableTest {
     public void testSetX() {
         System.out.println("setX");
         int x = 0;
-        ObjetDeplacable instance = null;
         instance.setX(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -135,12 +112,10 @@ public class ObjetDeplacableTest {
     @Test
     public void testGetY() {
         System.out.println("getY");
-        ObjetDeplacable instance = null;
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.getY();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -150,10 +125,8 @@ public class ObjetDeplacableTest {
     public void testSetY() {
         System.out.println("setY");
         int y = 0;
-        ObjetDeplacable instance = null;
         instance.setY(y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -162,12 +135,9 @@ public class ObjetDeplacableTest {
     @Test
     public void testGetOrientation() {
         System.out.println("getOrientation");
-        ObjetDeplacable instance = null;
-        String expResult = "";
-        String result = instance.getOrientation();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "S";
+        assertEquals(expResult, instance.getOrientation());
+
     }
 
     /**
@@ -177,10 +147,8 @@ public class ObjetDeplacableTest {
     public void testSetOrientation() {
         System.out.println("setOrientation");
         String orientation = "";
-        ObjetDeplacable instance = null;
         instance.setOrientation(orientation);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -189,12 +157,10 @@ public class ObjetDeplacableTest {
     @Test
     public void testGetSequence() {
         System.out.println("getSequence");
-        ObjetDeplacable instance = null;
         char[] expResult = null;
         char[] result = instance.getSequence();
         assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -204,10 +170,8 @@ public class ObjetDeplacableTest {
     public void testSetSequence() {
         System.out.println("setSequence");
         char[] sequence = null;
-        ObjetDeplacable instance = null;
         instance.setSequence(sequence);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -216,12 +180,10 @@ public class ObjetDeplacableTest {
     @Test
     public void testClone() throws Exception {
         System.out.println("clone");
-        ObjetDeplacable instance = null;
         ObjetDeplacable expResult = null;
         ObjetDeplacable result = instance.clone();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
-    
+
 }

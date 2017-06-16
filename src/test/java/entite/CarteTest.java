@@ -18,7 +18,14 @@ import static org.junit.Assert.*;
  */
 public class CarteTest {
     
+    Case montagne;
+    Case tresor;
+    Carte instance;
+    
     public CarteTest() {
+        montagne = new Montagne(1, 1);
+        tresor = new Tresor(0, 0, 3);
+        instance = new Carte(2, 2);
     }
     
     @BeforeClass
@@ -43,11 +50,9 @@ public class CarteTest {
     @Test
     public void testAjouterObjet() {
         System.out.println("ajouterObjet");
-        Case c = null;
-        Carte instance = null;
-        instance.ajouterObjet(c);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.ajouterObjet(montagne);
+        assertEquals(montagne, instance.getCase(montagne.getX(), montagne.getY()));
+        
     }
 
     /**
@@ -56,12 +61,9 @@ public class CarteTest {
     @Test
     public void testGetCarte() {
         System.out.println("getCarte");
-        Carte instance = null;
-        Case[][] expResult = null;
         Case[][] result = instance.getCarte();
-        assertArrayEquals(expResult, result);
+        //assertArrayEquals(, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -72,12 +74,7 @@ public class CarteTest {
         System.out.println("getCase");
         int x = 0;
         int y = 0;
-        Carte instance = null;
-        Case expResult = null;
         Case result = instance.getCase(x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -86,12 +83,9 @@ public class CarteTest {
     @Test
     public void testGetX() {
         System.out.println("getX");
-        Carte instance = null;
-        int expResult = 0;
         int result = instance.getX();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(2, result);
+        
     }
 
     /**
@@ -101,10 +95,9 @@ public class CarteTest {
     public void testSetX() {
         System.out.println("setX");
         int x = 0;
-        Carte instance = null;
         instance.setX(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(instance.getX(), 0);
     }
 
     /**
@@ -113,12 +106,10 @@ public class CarteTest {
     @Test
     public void testGetY() {
         System.out.println("getY");
-        Carte instance = null;
-        int expResult = 0;
+        int expResult = 2;
         int result = instance.getY();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -128,10 +119,9 @@ public class CarteTest {
     public void testSetY() {
         System.out.println("setY");
         int y = 0;
-        Carte instance = null;
         instance.setY(y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getY(), 0); //pour des objets ou des longs
+
     }
     
 }

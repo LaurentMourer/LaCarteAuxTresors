@@ -20,9 +20,9 @@ import static org.junit.Assert.*;
  *
  * @author pbyw529
  */
-public class CreationTest {
+public class GestionObjetsTest {
     
-    public CreationTest() {
+    public GestionObjetsTest() {
     }
     
     @BeforeClass

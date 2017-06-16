@@ -17,22 +17,25 @@ import static org.junit.Assert.*;
  * @author laurentmourer
  */
 public class CaseTest {
-    
+
+    Case instance;
+
     public CaseTest() {
+        instance = new Montagne(1, 1);
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,12 +46,10 @@ public class CaseTest {
     @Test
     public void testGetX() {
         System.out.println("getX");
-        Case instance = null;
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.getX();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -57,11 +58,9 @@ public class CaseTest {
     @Test
     public void testSetX() {
         System.out.println("setX");
-        int x = 0;
-        Case instance = null;
+        int x = 2;
         instance.setX(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(x, instance.getX());
     }
 
     /**
@@ -70,12 +69,10 @@ public class CaseTest {
     @Test
     public void testGetY() {
         System.out.println("getY");
-        Case instance = null;
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.getY();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -85,10 +82,9 @@ public class CaseTest {
     public void testSetY() {
         System.out.println("setY");
         int y = 0;
-        Case instance = null;
         instance.setY(y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(y, instance.getY());
+
     }
 
     /**
@@ -97,12 +93,9 @@ public class CaseTest {
     @Test
     public void testIsFranchissable() {
         System.out.println("isFranchissable");
-        Case instance = null;
         boolean expResult = false;
         boolean result = instance.isFranchissable();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -111,25 +104,10 @@ public class CaseTest {
     @Test
     public void testSetFranchissable() {
         System.out.println("setFranchissable");
-        boolean franchissable = false;
-        Case instance = null;
+        boolean franchissable = true;
         instance.setFranchissable(franchissable);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(franchissable, instance.isFranchissable());
+
     }
 
-    /**
-     * Test of toString method, of class Case.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Case instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
