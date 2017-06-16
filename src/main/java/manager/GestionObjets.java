@@ -21,6 +21,14 @@ public class GestionObjets {
     private Carte carte;
     private GestionFichier gestionFichier;
 
+    /**
+     * Constructeur de la classe GestionObjets, instancie les listes d'objets
+     * correspondant au ligne du fichier
+     *
+     * @param listeLignes une liste de ligne ou chaque ligne correspond à un
+     * objet
+     * @param delimiter le token qui separe chaque champs de la lignes
+     */
     public GestionObjets(List<String> listeLignes, String delimiter) {
         gestionFichier = new GestionFichier();
         listeObjetDeplacable = new ArrayList();
@@ -49,6 +57,10 @@ public class GestionObjets {
         });
     }
 
+    /**
+     * Methode qui recopie les listes dans un fichier
+     *
+     */
     public void recopieObjetDansFichier() {
         List<String> liste = new ArrayList();
         liste.add(carte.toString());

@@ -22,6 +22,10 @@ public class GestionFichier {
 
     }
 
+    /**
+     * Methode qui écrit dans un fichier
+     *
+     */
     public void lireFichier() {
         Path path = Paths.get("C:/Users/pbyw529/Desktop/LaCarteAuxTresors/target/classes/test.txt");
         try {
@@ -31,6 +35,10 @@ public class GestionFichier {
         }
     }
 
+    /**
+     * Methode qui lit un fichier
+     *
+     */
     public void ecrireFichier(String fichier, List<String> liste) {
         Path path = Paths.get("C:/Users/pbyw529/Desktop/LaCarteAuxTresors/target/classes/test2.txt");
 
