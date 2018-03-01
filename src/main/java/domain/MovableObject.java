@@ -9,11 +9,11 @@ public abstract class MovableObject {
 
     private final Position position;
     private final Orientation orientation;
-    private final char[] sequence;
+    private final Movement[] sequence;
 
     MovableObject(final Position position,
                   final Orientation orientation,
-                  final char[] sequence) {
+                  final Movement[] sequence) {
         this.position = position;
         this.orientation = orientation;
         this.sequence = sequence;
@@ -41,7 +41,7 @@ public abstract class MovableObject {
         return orientation;
     }
 
-    public char[] getSequence() {
+    public Movement[] getSequence() {
         return sequence;
     }
 

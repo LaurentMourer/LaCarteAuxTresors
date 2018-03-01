@@ -5,7 +5,7 @@ import domain.Position;
 
 public final class MovementManager {
 
-    public static Position avancer(final Orientation orientation, final Position position) {
+    public static Position moveForward(final Orientation orientation, final Position position) {
 
         final Position nextPosition;
 
@@ -29,7 +29,7 @@ public final class MovementManager {
         return nextPosition;
     }
 
-    public static Orientation right(final Orientation orientation) {
+    public static Orientation moveRight(final Orientation orientation) {
         final Orientation nextOrientation;
 
         switch (orientation) {
@@ -53,7 +53,7 @@ public final class MovementManager {
         return nextOrientation;
     }
 
-    public static Orientation left(final Orientation orientation) {
+    public static Orientation moveLeft(final Orientation orientation) {
 
         final Orientation nextOrientation;
 

@@ -1,51 +1,52 @@
 package manager;
 
+import Factory.AdventurersFactory;
+import Factory.CasesFactory;
 import domain.*;
 
+import java.util.Collection;
 import java.util.List;
 
 public class GameManager {
 
     private final TreasureMap treasureMap;
-    private final List<Adventurer> adventurers;
-    private final ObjectsManager objectsManager;
+    private final Collection<Adventurer> adventurers;
 
     public GameManager() {
         final List<String> lines = FileManager.readFile();
 
-        objectsManager = new ObjectsManager(lines, " - ");
+        adventurers = AdventurersFactory.createAdventurers(lines, " - ");
 
-        adventurers = objectsManager.getAdventurers();
+        treasureMap = CasesFactory.createMap(lines);
 
-        treasureMap = objectsManager.getTreasureMap();
-
-        objectsManager.getCases().forEach(treasureMap::addObject);
+        CasesFactory.createCases(lines, " - ").forEach(treasureMap::addObject);
     }
 
     public void readSequence() {
         for (final Adventurer adventurer : adventurers) {
-            //Si l'aventurier spawn sur la meme case qu'un tresor, on le ramasse;
 
-            isTresor(adventurer.getPosition());
+            isTreasure(adventurer.getPosition());
 
             for (int i = 0; i < adventurer.getSequence().length; i++) {
 
-                final Position futurePosition = MovementManager.avancer(adventurer.getOrientation(), adventurer.getPosition());
+                final Position futurePosition = MovementManager.moveForward(adventurer.getOrientation(),
+                        adventurer.getPosition());
 
                 switch (adventurer.getSequence()[i]) {
-                    case 'A':
-                        if (isDeplacable(futurePosition)) {
-                            final Position avancer = MovementManager.avancer(adventurer.getOrientation(), adventurer.getPosition());
-                            adventurer.setPosition(avancer);
-                            isTresor(adventurer.getPosition());
+                    case MOVE_FORWARD:
+                        if (isMovable(futurePosition)) {
+                            final Position position = MovementManager.moveForward(adventurer.getOrientation(),
+                                    adventurer.getPosition());
+                            adventurer.setPosition(position);
+                            isTreasure(adventurer.getPosition());
                         }
                         break;
-                    case 'G':
-                        final Orientation left = MovementManager.left(adventurer.getOrientation());
+                    case MOVE_LEFT:
+                        final Orientation left = MovementManager.moveLeft(adventurer.getOrientation());
                         adventurer.setPosition(left);
                         break;
-                    case 'D':
-                        final Orientation orientation = MovementManager.right(adventurer.getOrientation());
+                    case MOVE_RIGHT:
+                        final Orientation orientation = MovementManager.moveRight(adventurer.getOrientation());
                         adventurer.setPosition(orientation);
                         break;
                     default:
@@ -53,10 +54,10 @@ public class GameManager {
                 }
             }
         }
-        objectsManager.writeInFile(treasureMap);
+        ObjectsManager.writeInFile(treasureMap, adventurers);
     }
 
-    private void isTresor(final Position position) {
+    private void isTreasure(final Position position) {
         if (treasureMap.getCase(position.getX(), position.getY()) instanceof Treasure && position instanceof Adventurer) {
             //Si il est sur une case tresor, on le prend
             ((Treasure) treasureMap.getCase(position.getX(), position.getY())).pickupTreasure();
@@ -65,7 +66,7 @@ public class GameManager {
         }
     }
 
-    private boolean isDeplacable(final Position position) {
+    private boolean isMovable(final Position position) {
         return position.getX() >= 0 && position.getY() >= 0 &&
                 position.getX() < treasureMap.getWidth() &&
                 position.getY() < treasureMap.getLength() &&
