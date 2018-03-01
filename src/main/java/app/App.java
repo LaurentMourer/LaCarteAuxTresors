@@ -1,16 +1,11 @@
 package app;
 
-import manager.GestionJeu;
+import manager.GameManager;
 
-/**
- * Classe principale
- *
- * @author Laurent Mourer
- */
-public class App {
+public final class App {
 
-    public static void main(String[] args) {
-        new GestionJeu().lectureSequence();
+    public static void main(final String[] args) {
+        new GameManager().readSequence();
 
     }
 }
