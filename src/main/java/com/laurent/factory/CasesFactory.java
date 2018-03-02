@@ -1,8 +1,12 @@
 package com.laurent.factory;
 
-import com.laurent.domain.*;
+import com.laurent.domain.Case;
+import com.laurent.domain.Mountain;
+import com.laurent.domain.Position;
+import com.laurent.domain.Treasures;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -35,14 +39,7 @@ public final class CasesFactory {
     }
 
     private static void addTreasure(final String[] line, final List<Case> cases) {
-        final Treasures treasures = new Treasures(new Position(getInt(line[1]), getInt(line[2])));
-
-
-        final int treasureCount = getInt(line[3]);
-
-        for (int i = 0; i < treasureCount; i++) {
-            treasures.addTreasure(new Treasure());
-        }
+        final Treasures treasures = new Treasures(new Position(getInt(line[1]), getInt(line[2])), new AtomicInteger(getInt(line[3])));
 
         cases.add(treasures);
     }

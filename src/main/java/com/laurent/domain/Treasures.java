@@ -1,19 +1,18 @@
 package com.laurent.domain;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Treasures extends Case {
 
-    private final List<Treasure> treasures = newArrayList();
+    private final AtomicInteger count;
 
 
-    public Treasures(final Position position) {
+    public Treasures(final Position position, final AtomicInteger count) {
         super(position, true);
+        this.count = count;
     }
 
     @Override
@@ -21,33 +20,27 @@ public class Treasures extends Case {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        final Treasures treasures1 = (Treasures) o;
-        return Objects.equal(treasures, treasures1.treasures);
+        final Treasures treasures = (Treasures) o;
+        return Objects.equals(count, treasures.count);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(super.hashCode(), treasures);
+        return Objects.hash(super.hashCode(), count);
     }
 
-    public void addTreasure(final Treasure treasure) {
-        treasures.add(treasure);
+    public AtomicInteger getCount() {
+        return count;
     }
 
-    public Treasure removeTreasure(final Treasure treasure) {
-        treasures.remove(treasure);
-
-        return treasure;
-    }
-
-    public List<Treasure> getTreasures() {
-        return treasures;
+    public void removeTreasure() {
+        count.decrementAndGet();
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("treasures", treasures)
+                .add("count", count)
                 .toString();
     }
 }

@@ -38,11 +38,11 @@ public final class GameManager {
             pickUpIfExistTreasure(treasureMap, adventurer);
 
 
-            for (int i = 0; i < adventurer.getSequence().length; i++) {
+            for (int i = 0; i < adventurer.getMovements().size(); i++) {
                 final Orientation currentOrientation = adventurer.getOrientations().get(adventurer.getOrientations().size() - 1);
                 final Position futurePosition = MovementManager.moveForward(currentOrientation, currentPosition);
 
-                switch (adventurer.getSequence()[i]) {
+                switch (adventurer.getMovements().get(i)) {
                     case A:
                         if (isMovable(treasureMap, adventurers, futurePosition)) {
                             moveForward(adventurer, currentPosition, currentOrientation);
@@ -74,8 +74,9 @@ public final class GameManager {
         final Position position = adventurer.getPositions().get(adventurer.getPositions().size() - 1);
         if (treasureMap.getCase(position.getX(), position.getY()) instanceof Treasures) {
             final Treasures treasures = (Treasures) treasureMap.getCase(position.getX(), position.getY());
-            final Treasure treasure = treasures.removeTreasure(treasures.getTreasures().get(0));
-            adventurer.addTreasure(treasure);
+
+            treasures.removeTreasure();
+            adventurer.addTreasure();
         }
     }
 

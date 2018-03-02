@@ -31,7 +31,7 @@ public final class AdventurersFactory {
                 getMovements(line[5])));
     }
 
-    private static Movement[] getMovements(final String sequence) {
+    private static List<Movement> getMovements(final String sequence) {
         final char[] sequences = sequence.toCharArray();
 
         final Movement[] movements = new Movement[sequence.length()];
@@ -39,7 +39,7 @@ public final class AdventurersFactory {
 
             movements[i] = Movement.valueOf(String.valueOf(sequences[i]));
         }
-        return movements;
+        return newArrayList(movements);
 
     }
 

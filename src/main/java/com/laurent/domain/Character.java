@@ -12,7 +12,7 @@ public abstract class Character extends MovableObject {
     Character(final String name,
               final List<Position> positions,
               final List<Orientation> orientations,
-              final Movement[] movements) {
+              final List<Movement> movements) {
         super(positions, orientations, movements);
         this.name = name;
     }
