@@ -1,9 +1,9 @@
-package Factory;
+package com.laurent.factory;
 
-import domain.Adventurer;
-import domain.Movement;
-import domain.Orientation;
-import domain.Position;
+import com.laurent.domain.Adventurer;
+import com.laurent.domain.Movement;
+import com.laurent.domain.Orientation;
+import com.laurent.domain.Position;
 
 import java.util.List;
 

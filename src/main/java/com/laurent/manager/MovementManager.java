@@ -1,7 +1,7 @@
-package manager;
+package com.laurent.manager;
 
-import domain.Orientation;
-import domain.Position;
+import com.laurent.domain.Orientation;
+import com.laurent.domain.Position;
 
 final class MovementManager {
 

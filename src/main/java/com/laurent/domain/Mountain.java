@@ -1,4 +1,4 @@
-package domain;
+package com.laurent.domain;
 
 public class Mountain extends Case {
 

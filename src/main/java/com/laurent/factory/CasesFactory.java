@@ -1,6 +1,6 @@
-package Factory;
+package com.laurent.factory;
 
-import domain.*;
+import com.laurent.domain.*;
 
 import java.util.List;
 

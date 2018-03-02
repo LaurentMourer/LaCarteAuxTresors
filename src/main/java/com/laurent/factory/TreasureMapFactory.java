@@ -1,8 +1,8 @@
-package Factory;
+package com.laurent.factory;
 
-import domain.Case;
-import domain.Position;
-import domain.TreasureMap;
+import com.laurent.domain.Case;
+import com.laurent.domain.Position;
+import com.laurent.domain.TreasureMap;
 
 import java.util.List;
 

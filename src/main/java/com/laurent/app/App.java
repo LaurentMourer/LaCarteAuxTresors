@@ -1,6 +1,6 @@
-package app;
+package com.laurent.app;
 
-import manager.GameManager;
+import com.laurent.manager.GameManager;
 
 public final class App {
 

@@ -1,4 +1,4 @@
-package domain;
+package com.laurent.domain;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;

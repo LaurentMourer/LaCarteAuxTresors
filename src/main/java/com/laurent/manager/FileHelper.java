@@ -1,7 +1,7 @@
-package manager;
+package com.laurent.manager;
 
-import domain.Adventurer;
-import domain.TreasureMap;
+import com.laurent.domain.Adventurer;
+import com.laurent.domain.TreasureMap;
 
 import java.util.Arrays;
 import java.util.List;

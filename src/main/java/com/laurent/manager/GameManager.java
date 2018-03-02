@@ -1,14 +1,14 @@
-package manager;
+package com.laurent.manager;
 
-import Factory.AdventurersFactory;
-import Factory.CasesFactory;
-import Factory.TreasureMapFactory;
-import domain.*;
+import com.laurent.domain.*;
+import com.laurent.factory.AdventurersFactory;
+import com.laurent.factory.CasesFactory;
+import com.laurent.factory.TreasureMapFactory;
 
 import java.util.List;
 
-import static manager.MovementManager.moveLeft;
-import static manager.MovementManager.moveRight;
+import static com.laurent.manager.MovementManager.moveLeft;
+import static com.laurent.manager.MovementManager.moveRight;
 
 public final class GameManager {
 
