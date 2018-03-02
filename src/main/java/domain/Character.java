@@ -2,17 +2,18 @@ package domain;
 
 import com.google.common.base.MoreObjects;
 
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Character extends MovableObject {
 
     private final String name;
 
-    protected Character(final String name,
-                        final Position position,
-                        final Orientation orientation,
-                        final char[] sequence) {
-        super(position, orientation, sequence);
+    Character(final String name,
+              final List<Position> positions,
+              final List<Orientation> orientations,
+              final Movement[] movements) {
+        super(positions, orientations, movements);
         this.name = name;
     }
 

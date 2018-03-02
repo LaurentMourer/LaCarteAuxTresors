@@ -3,22 +3,22 @@ package manager;
 import domain.Adventurer;
 import domain.TreasureMap;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 
-public final class ObjectsManager {
+final class FileHelper {
 
     static void writeInFile(final TreasureMap treasureMap,
-                            final Collection<Adventurer> adventurers) {
+                            final List<Adventurer> adventurers) {
         final List<String> lines = newArrayList();
 
         lines.add(treasureMap.toString());
 
-        treasureMap.getTreasureMap().forEach(aCase -> {
-            lines.add(aCase.toString());
+        Arrays.stream(treasureMap.getTreasureMap()).forEach(aCase -> {
+            lines.add(Arrays.toString(aCase));
         });
 
         adventurers.forEach(adventurer -> {
@@ -28,7 +28,7 @@ public final class ObjectsManager {
         FileManager.writeFile(lines);
     }
 
-    private ObjectsManager() {
+    private FileHelper() {
         // NOP
     }
 }

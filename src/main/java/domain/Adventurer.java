@@ -4,17 +4,17 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
-import java.util.Collection;
+import java.util.List;
 
 public class Adventurer extends Character {
 
-    private final Collection<Treasure> treasures = Lists.newArrayList();
+    private final List<Treasure> treasures = Lists.newArrayList();
 
     public Adventurer(final String name,
-                      final Position position,
-                      final Orientation orientation,
-                      final char[] sequence) {
-        super(name, position, orientation, sequence);
+                      final List<Position> positions,
+                      final List<Orientation> orientations,
+                      final Movement[] movements) {
+        super(name, positions, orientations, movements);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Adventurer extends Character {
         treasures.add(treasure);
     }
 
-    public Collection<Treasure> getTreasures() {
+    public List<Treasure> getTreasures() {
         return treasures;
     }
 

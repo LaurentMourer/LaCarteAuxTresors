@@ -1,17 +1,18 @@
 package domain;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import java.util.Collection;
+import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 public class Treasures extends Case {
 
-    private final Collection<Treasure> treasures = newArrayList();
+    private final List<Treasure> treasures = newArrayList();
 
 
-    public Treasures(Position position) {
+    public Treasures(final Position position) {
         super(position, true);
     }
 
@@ -33,14 +34,20 @@ public class Treasures extends Case {
         treasures.add(treasure);
     }
 
-    public Collection<Treasure> getTreasures() {
+    public Treasure removeTreasure(final Treasure treasure) {
+        treasures.remove(treasure);
+
+        return treasure;
+    }
+
+    public List<Treasure> getTreasures() {
         return treasures;
     }
 
     @Override
     public String toString() {
-        return "Treasures{" +
-                "treasures=" + treasures +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("treasures", treasures)
+                .toString();
     }
 }

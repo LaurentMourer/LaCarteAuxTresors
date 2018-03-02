@@ -1,9 +1,9 @@
 package domain;
 
 public enum Item {
-    TREASURE("T"),
-    MOUNTAIN("M"),
-    ADVENTURER("A");
+    T("T"),
+    M("M"),
+    A("A");
 
     private final String item;
 

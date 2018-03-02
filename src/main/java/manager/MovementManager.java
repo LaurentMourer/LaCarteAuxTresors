@@ -3,23 +3,23 @@ package manager;
 import domain.Orientation;
 import domain.Position;
 
-public final class MovementManager {
+final class MovementManager {
 
-    public static Position moveForward(final Orientation orientation, final Position position) {
+    static Position moveForward(final Orientation orientation, final Position position) {
 
         final Position nextPosition;
 
         switch (orientation) {
-            case NORTH:
+            case N:
                 nextPosition = new Position(position.getX(), position.getY() - 1);
                 break;
-            case SOUTH:
+            case S:
                 nextPosition = new Position(position.getX(), position.getY() + 1);
                 break;
-            case EST:
+            case E:
                 nextPosition = new Position(position.getX() + 1, position.getY());
                 break;
-            case WEST:
+            case O:
                 nextPosition = new Position(position.getX() - 1, position.getY());
                 break;
             default:
@@ -29,21 +29,21 @@ public final class MovementManager {
         return nextPosition;
     }
 
-    public static Orientation moveRight(final Orientation orientation) {
+    static Orientation moveRight(final Orientation orientation) {
         final Orientation nextOrientation;
 
         switch (orientation) {
-            case NORTH:
-                nextOrientation = Orientation.EST;
+            case N:
+                nextOrientation = Orientation.E;
                 break;
-            case SOUTH:
-                nextOrientation = Orientation.WEST;
+            case S:
+                nextOrientation = Orientation.O;
                 break;
-            case EST:
-                nextOrientation = Orientation.SOUTH;
+            case E:
+                nextOrientation = Orientation.S;
                 break;
-            case WEST:
-                nextOrientation = Orientation.NORTH;
+            case O:
+                nextOrientation = Orientation.N;
                 break;
             default:
                 nextOrientation = orientation;
@@ -53,22 +53,22 @@ public final class MovementManager {
         return nextOrientation;
     }
 
-    public static Orientation moveLeft(final Orientation orientation) {
+    static Orientation moveLeft(final Orientation orientation) {
 
         final Orientation nextOrientation;
 
         switch (orientation) {
-            case NORTH:
-                nextOrientation = Orientation.WEST;
+            case N:
+                nextOrientation = Orientation.O;
                 break;
-            case SOUTH:
-                nextOrientation = Orientation.EST;
+            case S:
+                nextOrientation = Orientation.E;
                 break;
-            case EST:
-                nextOrientation = Orientation.NORTH;
+            case E:
+                nextOrientation = Orientation.N;
                 break;
-            case WEST:
-                nextOrientation = Orientation.SOUTH;
+            case O:
+                nextOrientation = Orientation.S;
                 break;
             default:
                 nextOrientation = orientation;

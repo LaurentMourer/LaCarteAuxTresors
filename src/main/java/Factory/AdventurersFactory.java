@@ -1,17 +1,17 @@
 package Factory;
 
 import domain.Adventurer;
+import domain.Movement;
 import domain.Orientation;
 import domain.Position;
 
-import java.util.Collection;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class AdventurersFactory {
+public final class AdventurersFactory {
 
-    public static Collection<Adventurer> createAdventurers(final List<String> lines, final String delimiter) {
+    public static List<Adventurer> createAdventurers(final List<String> lines, final String delimiter) {
         final List<Adventurer> adventurers = newArrayList();
 
         lines.stream()
@@ -25,10 +25,22 @@ public class AdventurersFactory {
         return adventurers;
     }
 
-    private static void addAdventurer(String[] line, final Collection<Adventurer> adventurers) {
-        adventurers.add(new Adventurer(line[1], new Position(getInt(line[2]), getInt(line[3])),
-                Orientation.valueOf(line[4]),
-                line[5].toCharArray()));
+    private static void addAdventurer(final String[] line, final List<Adventurer> adventurers) {
+        adventurers.add(new Adventurer(line[1], newArrayList(new Position(getInt(line[2]), getInt(line[3]))),
+                newArrayList(Orientation.valueOf(line[4])),
+                getMovements(line[5])));
+    }
+
+    private static Movement[] getMovements(final String sequence) {
+        final char[] sequences = sequence.toCharArray();
+
+        final Movement[] movements = new Movement[sequence.length()];
+        for (int i = 0; i < sequences.length; i++) {
+
+            movements[i] = Movement.valueOf(String.valueOf(sequences[i]));
+        }
+        return movements;
+
     }
 
     private static int getInt(final String s) {

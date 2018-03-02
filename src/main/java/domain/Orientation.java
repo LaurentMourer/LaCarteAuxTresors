@@ -1,15 +1,14 @@
 package domain;
 
 public enum Orientation {
-    NORTH("N"),
-    SOUTH("S"),
-    EST("E"),
-    WEST("O");
+    N("North"),
+    S("South"),
+    E("Est"),
+    O("West");
 
-    private final String orientation;
+    final String orientation;
 
     Orientation(final String orientation) {
         this.orientation = orientation;
-
     }
 }

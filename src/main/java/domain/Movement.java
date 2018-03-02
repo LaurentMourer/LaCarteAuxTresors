@@ -2,9 +2,9 @@ package domain;
 
 public enum Movement {
 
-    MOVE_FORWARD("A"),
-    MOVE_RIGHT("D"),
-    MOVE_LEFT("G");
+    A("Move_forward"),
+    D("Move_right"),
+    G("Move_left");
 
     private final String Movement;
 

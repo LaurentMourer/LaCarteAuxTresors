@@ -4,12 +4,28 @@ import domain.Case;
 import domain.Position;
 import domain.TreasureMap;
 
-import java.util.Collection;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public final class TreasureMapFactory {
 
-    public static TreasureMap createTreasureMap(final int width, final int length) {
+    public static List<TreasureMap> createMap(final List<String> lines, final String delimiter) {
+        final List<TreasureMap> treasureMaps = newArrayList();
+
+        lines.stream()
+                .map(line -> line.split(delimiter))
+                .forEach(line -> {
+                    if ("C".equalsIgnoreCase(getLines(line[0]))) {
+                        treasureMaps.add(createTreasureMap(getInt(line[1]),
+                                getInt(line[2])));
+                    }
+                });
+
+        return treasureMaps;
+    }
+
+    private static TreasureMap createTreasureMap(final int width, final int length) {
 
         return new TreasureMap(width, length, initTreasureMap(width, length));
     }
@@ -19,26 +35,11 @@ public final class TreasureMapFactory {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < length; j++) {
-                treasureMap[i][j] = new Case(new Position(width, length), true);
+                treasureMap[i][j] = new Case(new Position(i, j), true);
             }
         }
 
         return treasureMap;
-    }
-
-
-    public static Collection<Case> createMap(final List<String> lines, final String delimiter) {
-        TreasureMap treasureMap;
-
-
-        lines.stream()
-                .map(line -> line.split(delimiter))
-                .forEach(line -> {
-                    if ("C".equalsIgnoreCase(getLines(line[0]))) {
-                        treasureMap = TreasureMapFactory.createTreasureMap(getInt(line[1]),
-                                getInt(line[2]));
-                    }
-                });
     }
 
 
