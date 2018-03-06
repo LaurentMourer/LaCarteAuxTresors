@@ -3,9 +3,10 @@ package com.laurent.manager;
 import com.laurent.domain.Orientation;
 import com.laurent.domain.Position;
 
-final class MovementManager {
+final class MovementResolver {
 
-    static Position moveForward(final Orientation orientation, final Position position) {
+    static Position moveForward(final Orientation orientation, final Position position)
+    {
 
         final Position nextPosition;
 
@@ -29,7 +30,8 @@ final class MovementManager {
         return nextPosition;
     }
 
-    static Orientation moveRight(final Orientation orientation) {
+    static Orientation moveRight(final Orientation orientation)
+    {
         final Orientation nextOrientation;
 
         switch (orientation) {
@@ -53,7 +55,8 @@ final class MovementManager {
         return nextOrientation;
     }
 
-    static Orientation moveLeft(final Orientation orientation) {
+    static Orientation moveLeft(final Orientation orientation)
+    {
 
         final Orientation nextOrientation;
 
@@ -78,7 +81,8 @@ final class MovementManager {
         return nextOrientation;
     }
 
-    private MovementManager() {
+    private MovementResolver()
+    {
         // NOP
     }
 }

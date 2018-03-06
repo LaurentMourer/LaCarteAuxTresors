@@ -25,7 +25,7 @@ final class FileHelper {
             lines.add(adventurer.toString());
         });
 
-        FileManager.writeFile(lines);
+        IOFile.writeFile(lines);
     }
 
     private FileHelper() {

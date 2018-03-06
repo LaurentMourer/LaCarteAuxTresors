@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-final class FileManager {
+final class IOFile {
 
     static List<String> readFile() {
         final List<String> lines = newArrayList();
@@ -33,7 +33,8 @@ final class FileManager {
         }
     }
 
-    private FileManager() {
+    private IOFile()
+    {
         // NOP
     }
 
