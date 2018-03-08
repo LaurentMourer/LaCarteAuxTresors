@@ -9,10 +9,10 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 
-final class FileHelper {
+public final class FileHelper {
 
-    static void writeInFile(final TreasureMap treasureMap,
-                            final List<Adventurer> adventurers) {
+    public static void writeInFile(final TreasureMap treasureMap,
+                                   final List<Adventurer> adventurers) {
         final List<String> lines = newArrayList();
 
         lines.add(treasureMap.toString());
@@ -25,7 +25,7 @@ final class FileHelper {
             lines.add(adventurer.toString());
         });
 
-        IOFile.writeFile(lines);
+        //IOFile.writeFile(lines);
     }
 
     private FileHelper() {

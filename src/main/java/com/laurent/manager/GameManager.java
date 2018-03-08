@@ -1,12 +1,7 @@
 package com.laurent.manager;
 
 import com.google.common.collect.Lists;
-import com.laurent.domain.Adventurer;
-import com.laurent.domain.Case;
-import com.laurent.domain.Orientation;
-import com.laurent.domain.Position;
-import com.laurent.domain.TreasureMap;
-import com.laurent.domain.Treasures;
+import com.laurent.domain.*;
 import com.laurent.factory.AdventurersFactory;
 import com.laurent.factory.MountainFactory;
 import com.laurent.factory.TreasureFactory;
@@ -16,45 +11,58 @@ import java.util.List;
 
 public final class GameManager {
 
-    public static void LaunchGame()
-    {
-        final List<List<String>> lines = LinesRepository.getLines(IOFile.readFile(),
-                                                                  " - ");
+    private final IOFile ioFile = new IOFile();
+
+    public void LaunchGame() {
+        final List<List<String>> lines = LinesRepository.getLines(ioFile.getFile("index.txt"), " - ");
 
         final List<Adventurer> adventurers = Lists.newArrayList();
 
-        final List<Case> cases = Lists.newArrayList();
-
-        final List<TreasureMap> treasureMaps = Lists.newArrayList();
-
-        lines.forEach(line -> {
-            switch (line.get(0)) {
-                case "C":
-                    treasureMaps.add(TreasureMapFactory.createMap(line));
-                    break;
-                case "A":
-                    adventurers.add(AdventurersFactory.createAdventurers(line));
-                    break;
-                case "T":
-                    cases.add(TreasureFactory.createTreasure(line));
-                    break;
-                case "M":
-                    cases.add(MountainFactory.createMountain(line));
-                    break;
-                default:
-                    break;
-            }
-        });
-
-        final TreasureMap treasureMap = treasureMaps.get(0);
-
-        cases.forEach(treasureMap::addObject);
+        final TreasureMap treasureMap = initGame(lines, adventurers);
 
         readSequence(treasureMap, adventurers);
     }
 
-    private static void readSequence(final TreasureMap treasureMap, final List<Adventurer> adventurers)
-    {
+    private static TreasureMap initGame(final List<List<String>> lines, final List<Adventurer> adventurers) {
+
+        final List<TreasureMap> treasureMaps = Lists.newArrayList();
+
+        final List<Case> cases = Lists.newArrayList();
+
+        lines.forEach(line -> {
+            if (line.size() > 0) {
+                switch (line.get(0)) {
+                    case "C":
+                        treasureMaps.add(TreasureMapFactory.createMap(line));
+                        break;
+                    case "A":
+                        adventurers.add(AdventurersFactory.createAdventurers(line));
+                        break;
+                    case "T":
+                        cases.add(TreasureFactory.createTreasure(line));
+                        break;
+                    case "M":
+                        cases.add(MountainFactory.createMountain(line));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        final TreasureMap treasureMap;
+
+        if (treasureMaps.size() > 0) {
+            treasureMap = treasureMaps.get(0);
+            cases.forEach(treasureMap::addObject);
+        } else {
+            treasureMap = null;
+        }
+
+        return treasureMap;
+    }
+
+    private static void readSequence(final TreasureMap treasureMap, final List<Adventurer> adventurers) {
         for (final Adventurer adventurer : adventurers) {
 
             final Position currentPosition = adventurer.getPositions().get(adventurer.getPositions().size() - 1);
@@ -86,16 +94,14 @@ public final class GameManager {
         FileHelper.writeInFile(treasureMap, adventurers);
     }
 
-    private static void moveForward(final Adventurer adventurer, final Position currentPosition, final Orientation currentOrientation)
-    {
+    private static void moveForward(final Adventurer adventurer, final Position currentPosition, final Orientation currentOrientation) {
         final Position position = MovementResolver.moveForward(currentOrientation,
-                                                               currentPosition);
+                currentPosition);
 
         adventurer.addPosition(position);
     }
 
-    private static void pickUpIfExistTreasure(final TreasureMap treasureMap, final Adventurer adventurer)
-    {
+    private static void pickUpIfExistTreasure(final TreasureMap treasureMap, final Adventurer adventurer) {
         final Position position = adventurer.getPositions().get(adventurer.getPositions().size() - 1);
         if (treasureMap.getCase(position.getX(), position.getY()) instanceof Treasures) {
             final Treasures treasures = (Treasures) treasureMap.getCase(position.getX(), position.getY());
@@ -105,17 +111,15 @@ public final class GameManager {
         }
     }
 
-    private static boolean isMovable(final TreasureMap treasureMap, final List<Adventurer> adventurers, final Position position)
-    {
+    private static boolean isMovable(final TreasureMap treasureMap, final List<Adventurer> adventurers, final Position position) {
         return position.getX() >= 0 && position.getY() >= 0 &&
-               position.getX() < treasureMap.getWidth() &&
-               position.getY() < treasureMap.getLength() &&
-               treasureMap.getCase(position.getX(), position.getY()).isPassable() &&
-               !adventurers.contains(position);
+                position.getX() < treasureMap.getWidth() &&
+                position.getY() < treasureMap.getLength() &&
+                treasureMap.getCase(position.getX(), position.getY()).isPassable() &&
+                !adventurers.contains(position);
     }
 
-    private GameManager()
-    {
+    public GameManager() {
         // NOP
     }
 }

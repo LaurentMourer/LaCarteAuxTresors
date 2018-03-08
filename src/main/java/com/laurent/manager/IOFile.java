@@ -1,40 +1,39 @@
 package com.laurent.manager;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import java.nio.charset.Charset;
 
-import static com.google.common.collect.Lists.newArrayList;
+public final class IOFile {
 
-final class IOFile {
+    public String getFile(final String fileName) {
+        final ClassLoader classLoader = getClass().getClassLoader();
+        final StringBuilder stringBuilder = new StringBuilder();
 
-    static List<String> readFile() {
-        final List<String> lines = newArrayList();
         try {
-            final Path path = Paths.get(ClassLoader.getSystemResource("input.txt").toURI());
-            lines.addAll(Files.readAllLines(path, StandardCharsets.UTF_8));
-        } catch (final IOException | URISyntaxException e) {
+            stringBuilder.append(IOUtils.toString(classLoader.getResourceAsStream(fileName), Charset.defaultCharset()));
+        } catch (final IOException e) {
             e.printStackTrace();
         }
 
-        return lines;
+
+        return stringBuilder.toString();
     }
 
-    static void writeFile(final List<String> lines) {
-        final Path path = Paths.get("src/main/resources/output.txt");
+    public static void writeFile(final String lines, final String fileName) {
+        final File file = new File(fileName);
+
         try {
-            Files.write(path, lines, StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(file, lines, Charset.defaultCharset());
         } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
-    private IOFile()
-    {
+    IOFile() {
         // NOP
     }
 

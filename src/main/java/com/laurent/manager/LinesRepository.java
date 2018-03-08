@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 
 final class LinesRepository {
 
-    static List<List<String>> getLines(final List<String> fileLines, final String delimiter)
-    {
-        return fileLines.stream()
-                        .map(e -> getTokensWithCollection(e, delimiter))
-                        .collect(Collectors.toList());
+    static List<List<String>> getLines(final String fileLines, final String delimiter) {
+        final List<String> lines = getTokensWithCollection(fileLines, "\n");
+
+        return lines.stream()
+                .map(e -> getTokensWithCollection(e, delimiter))
+                .collect(Collectors.toList());
     }
 
-    private static List<String> getTokensWithCollection(final String str, final String delimiter)
-    {
+    private static List<String> getTokensWithCollection(final String str, final String delimiter) {
         return Collections.list(new StringTokenizer(str, delimiter)).stream()
-                          .map(token -> (String) token)
-                          .collect(Collectors.toList());
+                .map(token -> token.toString().trim())
+                .collect(Collectors.toList());
     }
 }
