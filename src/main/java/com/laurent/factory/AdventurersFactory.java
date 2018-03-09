@@ -10,16 +10,17 @@ import java.util.List;
 
 public final class AdventurersFactory {
 
-    public static Adventurer createAdventurers(final List<String> lines)
-    {
-        return new Adventurer(lines.get(1),
-                              Lists.newArrayList(new Position(StringHelper.getInt(lines.get(2)), StringHelper.getInt(lines.get(3)))),
-                              Lists.newArrayList(Orientation.valueOf(lines.get(4))),
-                              getMovements(lines.get(5)));
+    public static Adventurer createAdventurers(final List<String> lines) {
+        final Adventurer adventurer = new Adventurer(lines.get(1));
+
+        adventurer.getPosition().add(new Position(StringHelper.getInt(lines.get(2)), StringHelper.getInt(lines.get(3))));
+        adventurer.getOrientation().add(Orientation.valueOf(lines.get(4)));
+        adventurer.getMovements().addAll(getMovements(lines.get(5)));
+
+        return adventurer;
     }
 
-    private static List<Movement> getMovements(final String sequence)
-    {
+    private static List<Movement> getMovements(final String sequence) {
         final char[] sequences = sequence.toCharArray();
 
         final Movement[] movements = new Movement[sequence.length()];

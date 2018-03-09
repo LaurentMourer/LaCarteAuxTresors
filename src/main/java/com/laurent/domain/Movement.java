@@ -2,16 +2,14 @@ package com.laurent.domain;
 
 public enum Movement {
 
-    A("Move_forward"),
-    D("Move_right"),
-    G("Move_left");
+    MOVE_FORWARD("Move_forward"),
+    TURN_RIGHT("Move_right"),
+    TURN_LEFT("Move_left");
 
-    private final String Movement;
-
+    final String movement;
 
     Movement(final String movement) {
-        Movement = movement;
+        this.movement = movement;
     }
-
 
 }

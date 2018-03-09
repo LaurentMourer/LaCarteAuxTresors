@@ -1,12 +1,15 @@
 package com.laurent.app;
 
-import com.laurent.manager.GameManager;
+import com.laurent.config.AppConfig;
+import com.laurent.manager.GameService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public final class App {
 
-    private static final GameManager gameManager = new GameManager();
-
     public static void main(final String[] args) {
-        gameManager.LaunchGame();
+        final ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        final GameService myService = ctx.getBean(GameService.class);
+        myService.run();
     }
 }

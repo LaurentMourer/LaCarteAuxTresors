@@ -18,7 +18,7 @@ public class Case {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !getClass().equals(o.getClass())) return false;
         final Case aCase = (Case) o;
         return passable == aCase.passable &&
                 Objects.equals(position, aCase.position);

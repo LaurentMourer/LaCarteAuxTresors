@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-final class LinesRepository {
+final class LinesHelper {
 
     static List<List<String>> getLines(final String fileLines, final String delimiter) {
         final List<String> lines = getTokensWithCollection(fileLines, "\n");

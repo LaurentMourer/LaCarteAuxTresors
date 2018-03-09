@@ -1,14 +1,15 @@
 package com.laurent.domain;
 
 public enum TypeCase {
-    T("T"),
-    M("M"),
-    A("A");
+    TREASURE("T"),
+    MOUNTAIN("M"),
+    ADVENTURER("A"),
+    MAP("C");
 
-    private final String item;
+    final String type;
 
-    TypeCase(String item)
-    {
-        this.item = item;
+    TypeCase(final String type) {
+        this.type = type;
     }
+
 }

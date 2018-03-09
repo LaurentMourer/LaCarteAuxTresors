@@ -2,15 +2,18 @@ package com.laurent.manager;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-public final class IOFile {
+@Component
+public final class FileRepository {
+
+    private final ClassLoader classLoader = getClass().getClassLoader();
 
     public String getFile(final String fileName) {
-        final ClassLoader classLoader = getClass().getClassLoader();
         final StringBuilder stringBuilder = new StringBuilder();
 
         try {
@@ -23,7 +26,7 @@ public final class IOFile {
         return stringBuilder.toString();
     }
 
-    public static void writeFile(final String lines, final String fileName) {
+    public void writeFile(final String lines, final String fileName) {
         final File file = new File(fileName);
 
         try {
@@ -31,10 +34,6 @@ public final class IOFile {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-    }
-
-    IOFile() {
-        // NOP
     }
 
 }

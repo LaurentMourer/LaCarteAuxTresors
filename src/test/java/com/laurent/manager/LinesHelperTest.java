@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinesRepositoryTest {
+public class LinesHelperTest {
 
     @Test
     public void test_getLines() {
@@ -23,7 +23,7 @@ public class LinesRepositoryTest {
 
         final String delimiter = "-";
         // WHEN
-        final List<List<String>> actual = LinesRepository.getLines(lines, delimiter);
+        final List<List<String>> actual = LinesHelper.getLines(lines, delimiter);
 
 
         // THEN
