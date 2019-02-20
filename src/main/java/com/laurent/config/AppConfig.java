@@ -1,7 +1,7 @@
 package com.laurent.config;
 
-import com.laurent.manager.FileRepository;
-import com.laurent.manager.GameService;
+import com.laurent.repository.FileRepository;
+import com.laurent.service.GameService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

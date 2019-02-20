@@ -2,10 +2,11 @@ package com.laurent.manager;
 
 import com.laurent.domain.Orientation;
 import com.laurent.domain.Position;
+import com.laurent.factory.MovementFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class MovementResolverTest {
+public class MovementFactoryTest {
 
 
     @Test
@@ -16,7 +17,7 @@ public class MovementResolverTest {
         final Position position = new Position(1, 2);
 
         //WHEN
-        final Position actual = MovementResolver.moveForward(orientation, position);
+        final Position actual = MovementFactory.moveForward(orientation, position);
 
         // THEN
         final Position expected = new Position(1, 1);
@@ -30,7 +31,7 @@ public class MovementResolverTest {
         final Orientation orientation = Orientation.N;
 
         //WHEN
-        final Orientation actual = MovementResolver.moveRight(orientation);
+        final Orientation actual = MovementFactory.moveRight(orientation);
 
         // THEN
         final Orientation expected = Orientation.E;
@@ -44,7 +45,7 @@ public class MovementResolverTest {
         final Orientation orientation = Orientation.N;
 
         //WHEN
-        final Orientation actual = MovementResolver.moveLeft(orientation);
+        final Orientation actual = MovementFactory.moveLeft(orientation);
 
         // THEN
         final Orientation expected = Orientation.O;

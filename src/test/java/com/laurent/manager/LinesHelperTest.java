@@ -1,6 +1,7 @@
 package com.laurent.manager;
 
 import com.google.common.collect.Lists;
+import com.laurent.utils.LinesHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 

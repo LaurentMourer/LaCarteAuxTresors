@@ -1,13 +1,23 @@
-package com.laurent.manager;
+package com.laurent.service;
 
 import com.google.common.collect.Lists;
-import com.laurent.domain.*;
+import com.laurent.domain.Adventurer;
+import com.laurent.domain.Case;
+import com.laurent.domain.Movement;
+import com.laurent.domain.Orientation;
+import com.laurent.domain.Position;
+import com.laurent.domain.Treasure;
+import com.laurent.domain.TreasureMap;
+import com.laurent.domain.TypeCase;
 import com.laurent.factory.AdventurersFactory;
 import com.laurent.factory.MountainFactory;
+import com.laurent.factory.MovementFactory;
 import com.laurent.factory.TreasureFactory;
 import com.laurent.factory.TreasureMapFactory;
 import com.laurent.printer.AdventurerPrinter;
 import com.laurent.printer.TreasureMapPrinter;
+import com.laurent.repository.FileRepository;
+import com.laurent.utils.LinesHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -17,11 +27,13 @@ public class GameService {
     private final FileRepository fileRepository;
 
     @Autowired
-    public GameService(final FileRepository fileRepository) {
+    public GameService(final FileRepository fileRepository)
+    {
         this.fileRepository = fileRepository;
     }
 
-    public void run() {
+    public void run()
+    {
         final List<List<String>> lines = LinesHelper.getLines(fileRepository.getFile("input.txt"), " - ");
 
         final List<Adventurer> initialAdventurers = getAdventurers(lines);
@@ -38,13 +50,13 @@ public class GameService {
         fileRepository.writeFile(content, "output.txt");
     }
 
-
-    private TreasureMap getTreasureMap(final List<List<String>> lines) {
+    private TreasureMap getTreasureMap(final List<List<String>> lines)
+    {
         final List<TreasureMap> treasureMaps = Lists.newArrayList();
         final List<Case> cases = Lists.newArrayList();
 
         lines.forEach(line -> {
-            if (line.size() > 0) {
+            if (!line.isEmpty()) {
                 switch (TypeCase.valueOf(line.get(0))) {
                     case MAP:
                         treasureMaps.add(TreasureMapFactory.createMap(line));
@@ -63,22 +75,22 @@ public class GameService {
 
         final TreasureMap treasureMap;
 
-        if (treasureMaps.size() > 0) {
+        if (!treasureMaps.isEmpty()) {
             treasureMap = treasureMaps.get(0);
             cases.forEach(treasureMap::addObject);
         } else {
             treasureMap = null;
         }
 
-
         return treasureMap;
     }
 
-    private List<Adventurer> getAdventurers(final List<List<String>> lines) {
+    private List<Adventurer> getAdventurers(final List<List<String>> lines)
+    {
         final List<Adventurer> adventurers = Lists.newArrayList();
 
         lines.forEach(line -> {
-            if (line.size() > 0) {
+            if (!line.isEmpty()) {
                 final String typeCase = line.get(0);
 
                 if (TypeCase.valueOf(typeCase).equals(TypeCase.ADVENTURER)) {
@@ -90,11 +102,12 @@ public class GameService {
         return adventurers;
     }
 
-    private List<Adventurer> readAdventurerSequence(final TreasureMap treasureMap, final List<Adventurer> adventurers) {
+    private List<Adventurer> readAdventurerSequence(final TreasureMap treasureMap, final List<Adventurer> adventurers)
+    {
         for (final Adventurer adventurer : adventurers) {
             final Position currentPosition = adventurer.getPosition().get(adventurer.getPosition().size() - 1);
             final Orientation currentOrientation = adventurer.getOrientation().get(adventurer.getOrientation().size() - 1);
-            final Position futurePosition = MovementResolver.moveForward(currentOrientation, currentPosition);
+            final Position futurePosition = MovementFactory.moveForward(currentOrientation, currentPosition);
 
             pickUpIfExistTreasure(treasureMap, adventurer);
 
@@ -107,10 +120,10 @@ public class GameService {
                         }
                         break;
                     case TURN_LEFT:
-                        adventurer.getOrientation().add(MovementResolver.moveLeft(currentOrientation));
+                        adventurer.getOrientation().add(MovementFactory.moveLeft(currentOrientation));
                         break;
                     case TURN_RIGHT:
-                        adventurer.getOrientation().add(MovementResolver.moveRight(currentOrientation));
+                        adventurer.getOrientation().add(MovementFactory.moveRight(currentOrientation));
                         break;
                     default:
                         break;
@@ -120,12 +133,14 @@ public class GameService {
         return adventurers;
     }
 
-    private static Position moveForward(final Position currentPosition, final Orientation currentOrientation) {
-        return MovementResolver.moveForward(currentOrientation,
-                currentPosition);
+    private static Position moveForward(final Position currentPosition, final Orientation currentOrientation)
+    {
+        return MovementFactory.moveForward(currentOrientation,
+                                           currentPosition);
     }
 
-    private static void pickUpIfExistTreasure(final TreasureMap treasureMap, final Adventurer adventurer) {
+    private static void pickUpIfExistTreasure(final TreasureMap treasureMap, final Adventurer adventurer)
+    {
         final Position position = adventurer.getPosition().get(adventurer.getPosition().size() - 1);
         if (treasureMap.getCase(position.getX(), position.getY()) instanceof Treasure) {
             final Treasure treasure = (Treasure) treasureMap.getCase(position.getX(), position.getY());
@@ -135,14 +150,15 @@ public class GameService {
         }
     }
 
-    private static boolean isMovable(final TreasureMap treasureMap, final List<Adventurer> adventurers, final Position position) {
+    private static boolean isMovable(final TreasureMap treasureMap,
+                                     final List<Adventurer> adventurers,
+                                     final Position position)
+    {
         return position.getX() >= 0 && position.getY() >= 0 &&
-                position.getX() < treasureMap.getWidth() &&
-                position.getY() < treasureMap.getLength() &&
-                treasureMap.getCase(position.getX(), position.getY()).isPassable() &&
-                !adventurers.contains(position);
+               position.getX() < treasureMap.getWidth() &&
+               position.getY() < treasureMap.getLength() &&
+               treasureMap.getCase(position.getX(), position.getY()).isPassable() &&
+               !adventurers.contains(position);
         // TODO @lmourer fix is movable
     }
-
-
 }

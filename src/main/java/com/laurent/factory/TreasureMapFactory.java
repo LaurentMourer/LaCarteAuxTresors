@@ -3,10 +3,16 @@ package com.laurent.factory;
 import com.laurent.domain.Case;
 import com.laurent.domain.Position;
 import com.laurent.domain.TreasureMap;
+import com.laurent.utils.StringHelper;
 
 import java.util.List;
 
 public final class TreasureMapFactory {
+
+    private TreasureMapFactory()
+    {
+        // NOP
+    }
 
     public static TreasureMap createMap(final List<String> line)
     {
@@ -27,10 +33,5 @@ public final class TreasureMapFactory {
         }
 
         return treasureMap;
-    }
-
-    private TreasureMapFactory()
-    {
-        // NOP
     }
 }

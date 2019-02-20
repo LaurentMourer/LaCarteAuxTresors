@@ -1,6 +1,7 @@
 package com.laurent.manager;
 
 import com.laurent.config.AppConfig;
+import com.laurent.repository.FileRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

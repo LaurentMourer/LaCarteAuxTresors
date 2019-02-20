@@ -1,11 +1,16 @@
-package com.laurent.manager;
+package com.laurent.factory;
 
 import com.laurent.domain.Orientation;
 import com.laurent.domain.Position;
 
-final class MovementResolver {
+public final class MovementFactory {
 
-    static Position moveForward(final Orientation orientation, final Position position)
+    private MovementFactory()
+    {
+        // NOP
+    }
+
+    public static Position moveForward(final Orientation orientation, final Position position)
     {
 
         final Position nextPosition;
@@ -30,7 +35,7 @@ final class MovementResolver {
         return nextPosition;
     }
 
-    static Orientation moveRight(final Orientation orientation)
+    public static Orientation moveRight(final Orientation orientation)
     {
         final Orientation nextOrientation;
 
@@ -55,7 +60,7 @@ final class MovementResolver {
         return nextOrientation;
     }
 
-    static Orientation moveLeft(final Orientation orientation)
+    public static Orientation moveLeft(final Orientation orientation)
     {
 
         final Orientation nextOrientation;
@@ -79,10 +84,5 @@ final class MovementResolver {
         }
 
         return nextOrientation;
-    }
-
-    private MovementResolver()
-    {
-        // NOP
     }
 }
